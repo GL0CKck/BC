@@ -20,5 +20,6 @@ report 50100 "Radio Show"
             column("AdvertisingRevenue"; "Adverstising Revenue") { }
             column("RoyaltyCost"; "Royalty Cost") { }
         }
+
     }
 }

@@ -12,7 +12,9 @@ table 50107 "Listenership Entry"
         {
             TableRelation = "Radio Show";
         }
-        field(60; "Listener Count"; Decimal) { }
+        field(60; "Listener Count"; Decimal)
+        {
+        }
         field(70; "Audience Share"; Decimal) { }
         field(80; "Age Demographic"; Option)
         {

@@ -36,26 +36,14 @@ page 50108 "Radio Show Card"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Avarage Listeners"; Rec."Avarage Listeners")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Audience Share"; Rec."Audience Share")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Adverstising Revenue"; Rec."Adverstising Revenue")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Royalty Cost"; Rec."Royalty Cost")
-                {
-                    ApplicationArea = Basic;
-                }
                 field(Frequency; Rec.Frequency)
                 {
                     ApplicationArea = Basic;
+
                 }
+            }
+            group(Requirements)
+            {
                 field("APA Planned Quantity"; Rec."APA Planned Quantity")
                 {
                     ApplicationArea = Basic;
@@ -88,7 +76,22 @@ page 50108 "Radio Show Card"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Date Filter"; Rec."Date Filter")
+            }
+            group(Statistics)
+            {
+                field("Avarage Listeners"; Rec."Avarage Listeners")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Audience Share"; Rec."Audience Share")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Adverstising Revenue"; Rec."Adverstising Revenue")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Royalty Cost"; Rec.GetNewRoyaltyCost())
                 {
                     ApplicationArea = Basic;
                 }
