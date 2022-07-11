@@ -50,10 +50,15 @@ table 50100 "Radio Show"
         }
         field(100; "Avarage Listeners"; Decimal)
         {
+
             Editable = false;
             FieldClass = FlowField;
             CalcFormula = average("Listenership Entry"."Listener Count"
             where("Radio Show No." = field("No."), Date = field("Date Filter")));
+            trigger OnValidate()
+            begin
+                Message(StrSubstNo('Table OnValidate %1', Rec.RecordId())); // Не срабатывает
+            end;
         }
         field(110; "Audience Share"; Decimal)
         {
@@ -105,6 +110,13 @@ table 50100 "Radio Show"
             FieldClass = FlowFilter;
         }
     }
+    keys
+    {
+        key(PK; "No.", "Radio Show Type")
+        {
+            Clustered = true;
+        }
+    }
     trigger OnInsert()
     begin
         Message(StrSubstNo('Trigger OnInsert Table, %1', Rec.RecordId())); // %1,2,3 - параметр єтой строчки     
@@ -133,4 +145,5 @@ table 50100 "Radio Show"
         CalcFields("Royalty Cost");
         exit("Royalty Cost" * 0.1);
     end;
+
 }

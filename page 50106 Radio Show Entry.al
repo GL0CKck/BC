@@ -18,6 +18,14 @@ page 50106 "Radio Show Entry"
                 field("Radio Show No."; Rec."Radio Show No.")
                 {
                     ApplicationArea = All;
+                    trigger OnDrillDown()
+                    var
+                        RadioShowNo: Record "Radio Show";
+                        RadioShowType: Record "Radio Show Entry";
+                    begin
+                        RadioShowNo.SetFilter(RadioShowNo."No.", Rec."Radio Show No.");
+                        Page.Run(Page::"Radio Show Card", RadioShowNo);
+                    end;
                 }
                 field(Type; Rec.Type)
                 {

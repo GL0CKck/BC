@@ -13,7 +13,13 @@ table 50102 "Playlist Header"
         field(50; "Start time"; Time) { }
         field(60; "End Time"; Time) { }
     }
-
+    keys
+    {
+        key(PK; "No.")
+        {
+            Clustered = true;
+        }
+    }
 
 
 }

@@ -27,6 +27,16 @@ page 50108 "Radio Show Card"
                 field("Run Time"; Rec."Run Time")
                 {
                     ApplicationArea = Basic;
+                    trigger OnLookup(var Text: Text): Boolean
+                    var
+                        RunTime: Record "Radio Show Time";
+                    begin
+                        RunTime.Reset();
+                        if Page.RunModal(Page::"Radio Show Time", RunTime) = Action::LookupOK then
+                            Rec."Run Time" := RunTime.Time;
+                        Message(StrSubstNo('Trigger OnLookup  On Card field, %1', Rec.RecordId()));
+
+                    end;
                 }
                 field("Host Code"; Rec."Host Code")
                 {
@@ -96,6 +106,50 @@ page 50108 "Radio Show Card"
                     ApplicationArea = Basic;
                 }
             }
+            group(Quantity)
+            {
+                field(TotalQuantity; TotalAdverstisingRevenue)
+                {
+                    Caption = 'Total Adverstising Revenue';
+                    ApplicationArea = All;
+                    Editable = false;
+                }
+
+            }
         }
+
     }
+    var
+        TotalAdverstisingRevenue: Decimal;
+
+    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+
+    begin
+        UpdateTotal();
+        Message(StrSubstNo('Trigger OnInsertRecord All Page'));
+
+    end;
+
+    trigger OnDeleteRecord(): Boolean
+    begin
+        UpdateTotal();
+        Message(StrSubstNo('Trigger OnDeleteRecord All Page, %1', Rec.RecordId()));
+        // runs before table trigger delete if delete in card - runs table trig
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        Message(StrSubstNo('Trigger OnAfterGetRecord  All Page, %1', Rec.RecordId()));
+        UpdateTotal();
+    end;
+
+    procedure UpdateTotal()
+    var
+        RoyaltyCost: Record "Radio Show Entry";
+    begin
+        TotalAdverstisingRevenue := 0;
+        RoyaltyCost.Reset();
+        RoyaltyCost.CalcSums("Fee Amount");
+        TotalAdverstisingRevenue := RoyaltyCost."Fee Amount";
+    end;
 }
